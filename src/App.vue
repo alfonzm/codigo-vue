@@ -1,22 +1,32 @@
 <template lang="pug">
-  #app
-    editor
+  .workspace
+    editor.workspace__editor
+    preview.workspace__preview
 </template>
 
 <script>
 import Editor from './components/Editor.vue'
+import Preview from './components/Preview.vue'
 
 export default {
   name: 'App',
   components: {
-    Editor
+    Editor,
+    Preview,
   }
 }
 </script>
 
 <style lang="sass" scoped>
 
-#app
-  @apply bg-red-500
+.workspace
+  @apply tw-flex tw-h-screen
+
+  &__editor, &__preview
+    @apply tw-flex-grow tw-h-full tw-overflow-y-scroll
+    flex-basis: 0
+
+  &__editor
+    @apply tw-border-r
 
 </style>
