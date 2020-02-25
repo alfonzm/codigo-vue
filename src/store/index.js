@@ -1,26 +1,17 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import marked from 'marked'
+// import { createPersistedState } from 'vuex-electron'
+
+import note from './note'
 
 Vue.use(Vuex)
 
-marked.setOptions({
-  renderer: new marked.Renderer(),
-  gfm: true,
-})
-
 export const store = new Vuex.Store({
-  state: {
-    text: require('@/assets/test'),
+  modules: {
+    note,
   },
-  getters: {
-    textHtml(state) {
-      return marked(state.text)
-    },
-  },
-  mutations: {
-    UPDATE_TEXT (state, value) {
-      state.text = value
-    },
-  },
+  plugins: [
+    // createPersistedState(),
+    // createSharedMutations(),
+  ],
 })

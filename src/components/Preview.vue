@@ -7,7 +7,7 @@ export default {
   name: 'Preview',
   computed: {
     html() {
-      return this.$store.getters.textHtml
+      return this.$store.getters['note/textHtml']
     },
   },
 }
