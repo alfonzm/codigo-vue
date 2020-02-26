@@ -1,5 +1,6 @@
 <template lang="pug">
-  div.markdown-body(v-html="html")
+  .preview-wrapper
+    .markdown-body(v-html="html")
 </template>
 
 <script>
@@ -17,8 +18,11 @@ export default {
 </style>
 
 <style lang="sass">
+.preview-wrapper
+
 .markdown-body
-  @apply tw-p-4
+  @apply tw-p-4 tw-mx-auto
+  max-width: 800px
 
   ul
     list-style: disc
