@@ -1,10 +1,21 @@
 'use strict'
 
-import { app, protocol, BrowserWindow } from 'electron'
+import {
+  app,
+  protocol,
+  BrowserWindow,
+  Menu,
+  MenuItem,
+  ipcMain
+} from 'electron'
+
 import {
   createProtocol,
   /* installVueDevtools */
 } from 'vue-cli-plugin-electron-builder/lib'
+
+import menus from './menus'
+
 const isDevelopment = process.env.NODE_ENV !== 'production'
 
 // Keep a global reference of the window object, if you don't, the window will
@@ -19,6 +30,10 @@ function createWindow () {
   win = new BrowserWindow({ width: 800, height: 600, webPreferences: {
     nodeIntegration: true
   } })
+
+  // Setup menus
+  const menu = Menu.buildFromTemplate(menus(app, win))
+  Menu.setApplicationMenu(menu)
 
   if (process.env.WEBPACK_DEV_SERVER_URL) {
     // Load the url of the dev server if in development mode

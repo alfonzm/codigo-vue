@@ -8,8 +8,10 @@
 </template>
 
 <script>
+import { ipcRenderer } from 'electron'
 import { mapState } from 'vuex'
 
+import MenuEvents from './menuEvents'
 import Editor from './components/Editor.vue'
 import Preview from './components/Preview.vue'
 import Sidebar from './components/Sidebar.vue'
@@ -27,7 +29,33 @@ export default {
     ...mapState({
       isVisible: state => state.ui.isVisible
     })
-  }
+  },
+  mounted() {
+    // Open all links in external browser
+    let shell = require('electron').shell
+    document.addEventListener('click', function (event) {
+      if (event.target.tagName === 'A' && event.target.href.startsWith('http')) {
+        event.preventDefault()
+        shell.openExternal(event.target.href)
+      }
+    })
+    
+    ipcRenderer.on(MenuEvents.NEW_NOTE, () => {
+      this.$store.dispatch('note/createNewNote', true)
+    })
+
+    ipcRenderer.on(MenuEvents.TOGGLE_SIDEBAR, () => {
+      this.$store.dispatch('ui/toggleViewVisibility', 'sidebar')
+    })
+
+    ipcRenderer.on(MenuEvents.TOGGLE_PREVIEW, () => {
+      this.$store.dispatch('ui/toggleViewVisibility', 'preview')
+    })
+
+    ipcRenderer.on(MenuEvents.TOGGLE_EDITOR, () => {
+      this.$store.dispatch('ui/toggleViewVisibility', 'editor')
+    })
+  },
 }
 </script>
 
