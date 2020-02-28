@@ -98,7 +98,7 @@ export default {
 
 <style lang="sass">
 .editor-wrapper
-  @apply tw-p-3 tw-pr-0
+  @apply tw-py-5 tw-px-4 tw-pr-0
 
 .editor
   @apply tw-h-screen tw-w-full

@@ -21,7 +21,7 @@ export default {
 .preview-wrapper
 
 .markdown-body
-  @apply tw-p-4 tw-mx-auto
+  @apply tw-p-6 tw-mx-auto
   max-width: 800px
 
   ul

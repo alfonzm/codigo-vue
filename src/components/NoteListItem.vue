@@ -58,7 +58,9 @@ export default {
   text-overflow: ellipsis
 
 .note
-  @apply tw-py-3 tw-px-3 tw-pr-5 tw-relative tw-text-xs tw-border-b tw-border-gray-100
+  @apply tw-py-3 tw-px-3 tw-pr-5 tw-m-2 tw-rounded-lg
+  @apply tw-relative tw-text-sm
+  // @apply tw-border-b tw-border-gray-100
 
   &.selected
     @apply tw-bg-gray-200 // tw-text-white
@@ -69,6 +71,9 @@ export default {
     &:not(.selected)
       @apply tw-bg-gray-100
 
+    .note__delete
+      @apply tw-block
+
   &__title, &__subtitle
     @include one-line
 
@@ -76,16 +81,16 @@ export default {
     @apply tw-font-bold
 
   &__subtitle
-    @apply tw-text-gray-500
+    @apply tw-text-xs tw-text-gray-500
 
   &__timestamp
-    @apply tw-mr-2 tw-text-gray-900
+    @apply tw-mr-2 tw-text-gray-800
 
   // &:not(.selected) .note__excerpt
   //   @apply tw-text-gray-400
 
   &__delete
-    @apply tw-absolute tw-text-base tw-font-hairline tw-text-gray-400 tw-cursor-pointer tw-outline-none
+    @apply tw-absolute tw-text-base tw-font-hairline tw-text-gray-400 tw-cursor-pointer tw-outline-none tw-hidden
     right: 4px
     top: -1px
 

@@ -11,11 +11,11 @@
 import { ipcRenderer } from 'electron'
 import { mapState } from 'vuex'
 
-import MenuEvents from './menuEvents'
-import Editor from './components/Editor.vue'
-import Preview from './components/Preview.vue'
-import Sidebar from './components/Sidebar.vue'
-import Toolbar from './components/Toolbar.vue'
+import MenuEvents from '@/menuEvents'
+import Editor from '@/components/Editor.vue'
+import Preview from '@/components/Preview.vue'
+import Sidebar from '@/components/Sidebar.vue'
+import Toolbar from '@/components/Toolbar.vue'
 
 export default {
   name: 'App',
@@ -84,7 +84,11 @@ export default {
 
   &__sidebar
     @apply tw-flex-grow-0 tw-flex-shrink-0
-    flex-basis: 180px
+
+    flex-basis: 200px
+
+    @media(max-width: 768px)
+      flex-basis: 150px
 
   &__sidebar, &__editor
     @apply tw-border-r

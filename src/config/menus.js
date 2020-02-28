@@ -1,5 +1,5 @@
-import MenuEvents from './menuEvents'
-import MenuIds from './menuIds'
+import MenuEvents from '@/menuEvents'
+import MenuIds from '@/menuIds'
 
 export default (app, win) => {
   const send = (event, payload) => {
@@ -35,9 +35,21 @@ export default (app, win) => {
         { role: 'undo' },
         { role: 'redo' },
         { type: 'separator' },
+        {
+          label: 'Find',
+          submenu: [
+            {
+              label: 'Find Note',
+              accelerator: 'Cmd+Shift+F',
+              click: () => { send(MenuEvents.FIND_NOTE) },
+            },
+          ]
+        },
+        { type: 'separator' },
         { role: 'cut' },
         { role: 'copy' },
         { role: 'paste' },
+        { role: 'selectall' },
       ]
     },
 
@@ -64,12 +76,12 @@ export default (app, win) => {
           accelerator: 'Shift+CmdOrCtrl+E',
           click: () => { send(MenuEvents.TOGGLE_EDITOR) },
         },
-        {
-          label: 'Toggle Toolbar',
-          id: MenuIds.TOGGLE_TOOLBAR,
-          accelerator: 'Shift+CmdOrCtrl+T',
-          click: () => { send(MenuEvents.TOGGLE_TOOLBAR) },
-        },
+        // {
+        //   label: 'Toggle Toolbar',
+        //   id: MenuIds.TOGGLE_TOOLBAR,
+        //   accelerator: 'Shift+CmdOrCtrl+T',
+        //   click: () => { send(MenuEvents.TOGGLE_TOOLBAR) },
+        // },
         { type: 'separator' },
         { role: 'resetzoom' },
         { role: 'zoomin' },

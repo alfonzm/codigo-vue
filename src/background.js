@@ -14,7 +14,8 @@ import {
   /* installVueDevtools */
 } from 'vue-cli-plugin-electron-builder/lib'
 
-import menus from './menus'
+import menus from './config/menus'
+import browserWindowConfig from './config/browserWindow.config'
 
 const isDevelopment = process.env.NODE_ENV !== 'production'
 
@@ -27,9 +28,7 @@ protocol.registerSchemesAsPrivileged([{scheme: 'app', privileges: { secure: true
 
 function createWindow () {
   // Create the browser window.
-  win = new BrowserWindow({ width: 800, height: 600, webPreferences: {
-    nodeIntegration: true
-  } })
+  win = new BrowserWindow(browserWindowConfig)
 
   // Setup menus
   const menu = Menu.buildFromTemplate(menus(app, win))

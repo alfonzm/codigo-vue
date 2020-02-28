@@ -6,6 +6,7 @@ import marked from 'marked'
 import sanitizeHtml from 'sanitize-html'
 import Store from 'electron-store'
 import { v1 as uuidv1 } from 'uuid'
+import { getField, updateField } from 'vuex-map-fields'
 
 const store = new Store()
 
@@ -18,11 +19,13 @@ export default {
   namespaced: true,
 
   state: {
+    searchText: '',
     currentNoteId: null,
     notes: store.get('notes', {}),
     saveTimeout: null,
   },
   getters: {
+    getField,
     currentNote(state) {
       console.log('current note', {...state.notes[state.currentNoteId]})
       return state.notes[state.currentNoteId]
@@ -35,12 +38,17 @@ export default {
       return _.keys(state.notes).length
     },
     // used by sidebar. returns array of note obj: { id, text, timestamp, title, excerpt }
-    notesList({ notes }) {
-      const noteList = _.keys(notes).map(id => {
+    notesList({ notes, searchText }) {
+      let filteredNotes
+      if(searchText) {
+        filteredNotes = _.pickBy(notes, n => n.text.indexOf(searchText) > -1)
+      } else {
+        filteredNotes = notes
+      }
+      const noteList = _.keys(filteredNotes).map(id => {
+        const note = filteredNotes[id]
         let title
         let excerpt
-
-        const note = notes[id]
 
         if(note.text.length > 0) {
           let textPerLine = note.text.split('\n')
@@ -78,6 +86,7 @@ export default {
     },
   },
   mutations: {
+    updateField,
     SET_NOTES(state, notes) {
       state.notes = notes
     },

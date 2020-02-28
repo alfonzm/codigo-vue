@@ -5,6 +5,7 @@ import App from './App.vue'
 import { store } from './store'
 import '@/assets/css/tailwind.css'
 import '@/assets/css/fonts.css'
+import '@/assets/css/base.css'
 
 Vue.config.productionTip = false
 Vue.use(Vuex)

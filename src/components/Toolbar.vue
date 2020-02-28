@@ -1,17 +1,17 @@
 <template lang="pug">
   .toolbar
-    .toolbar__start
-      toolbar-button.toolbar__btn(@click="createNewNote") New Note +
-      toolbar-button.toolbar__btn(@click="deleteAllNotes") Delete All x
-    .toolbar__end
-      toolbar-button.toolbar__btn(@click="togglePane('editor')") Toggle Editor
-      toolbar-button.toolbar__btn(@click="togglePane('sidebar')") Toggle Sidebar
-      toolbar-button.toolbar__btn(@click="togglePane('preview')") Toggle Preview
+    //- .toolbar__start
+    //-   toolbar-button.toolbar__btn(@click="createNewNote") New Note +
+    //-   toolbar-button.toolbar__btn(@click="deleteAllNotes") Delete All x
+    //- .toolbar__end
+    //-   toolbar-button.toolbar__btn(@click="togglePane('editor')") Toggle Editor
+    //-   toolbar-button.toolbar__btn(@click="togglePane('sidebar')") Toggle Sidebar
+    //-   toolbar-button.toolbar__btn(@click="togglePane('preview')") Toggle Preview
 </template>
 
 <script>
 
-import ToolbarButton from './common/ToolbarButton'
+import ToolbarButton from '@/components/presentation/ToolbarButton'
 
 export default {
   name: 'Toolbar',
@@ -38,7 +38,7 @@ export default {
 
 <style lang="sass">
 .toolbar
-  @apply tw-flex tw-justify-between tw-p-2 tw-border-b tw-border-gray-200
+  @apply tw-flex tw-justify-between tw-p-2 tw-border-b
 
   &__btn
     @apply tw-mr-1
