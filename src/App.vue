@@ -1,6 +1,6 @@
 <template lang="pug">
   .app
-    toolbar.app__toolbar
+    toolbar.app__toolbar(v-if="isVisible.toolbar")
     .app__workspace
       sidebar.workspace__sidebar(v-if="isVisible.sidebar")
       editor.workspace__editor(v-if="isVisible.editor")
@@ -54,6 +54,10 @@ export default {
 
     ipcRenderer.on(MenuEvents.TOGGLE_EDITOR, () => {
       this.$store.dispatch('ui/toggleViewVisibility', 'editor')
+    })
+
+    ipcRenderer.on(MenuEvents.TOGGLE_TOOLBAR, () => {
+      this.$store.dispatch('ui/toggleViewVisibility', 'toolbar')
     })
   },
 }

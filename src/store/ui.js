@@ -11,6 +11,7 @@ export default {
 
   state: {
     isVisible: {
+      toolbar: true,
       editor: true,
       preview: true,
       sidebar: true,

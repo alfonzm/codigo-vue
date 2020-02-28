@@ -1,5 +1,6 @@
 const menuIds = {}
 const ids = [
+  'TOGGLE_TOOLBAR',
   'TOGGLE_SIDEBAR',
   'TOGGLE_PREVIEW',
   'TOGGLE_EDITOR',

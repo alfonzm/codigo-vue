@@ -51,16 +51,24 @@ export default (app, win) => {
           id: MenuIds.TOGGLE_SIDEBAR,
           accelerator: 'CmdOrCtrl+\\',
           click: () => { send(MenuEvents.TOGGLE_SIDEBAR) },
-        },{
+        },
+        {
           label: 'Toggle Preview',
           id: MenuIds.TOGGLE_PREVIEW,
           accelerator: 'Shift+CmdOrCtrl+P',
           click: () => { send(MenuEvents.TOGGLE_PREVIEW) },
-        },{
+        },
+        {
           label: 'Toggle Editor',
           id: MenuIds.TOGGLE_EDITOR,
           accelerator: 'Shift+CmdOrCtrl+E',
           click: () => { send(MenuEvents.TOGGLE_EDITOR) },
+        },
+        {
+          label: 'Toggle Toolbar',
+          id: MenuIds.TOGGLE_TOOLBAR,
+          accelerator: 'Shift+CmdOrCtrl+T',
+          click: () => { send(MenuEvents.TOGGLE_TOOLBAR) },
         },
         { type: 'separator' },
         { role: 'resetzoom' },
