@@ -1,3 +1,13 @@
-input[type="text"] {
+input[type="text"]:focus,
+button:focus
+{
   outline: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:hover {
+  cursor: pointer !important;
 }

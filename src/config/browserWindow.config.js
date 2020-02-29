@@ -8,4 +8,5 @@ export default {
   minHeight: 480,
   // frame: false,
   titleBarStyle: 'hiddenInset',
+  // titleBarStyle: 'customButtonsOnHover',
 }

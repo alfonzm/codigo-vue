@@ -1,7 +1,7 @@
 <template lang="pug">
   .note(:class="{ 'selected': isSelected }" @click="selectNote" @click.meta="addNoteToSelection")
     button.note__delete(@click="deleteNote") ×
-    p.note__title {{ note.title || 'New note' }}
+    p.note__title {{ prettyTitle }}
     p.note__subtitle
       span.note__timestamp {{ prettyTimestamp }}
       |
@@ -22,6 +22,9 @@ export default {
     isSelected() {
       return this.note.id == this.currentNoteId
     },
+    prettyTitle () {
+      return this.note.title && this.note.title.trim() ? this.note.title : 'New note'
+    },
     prettyTimestamp() {
       const momentDate = moment(this.note.timestamp)
       const now = moment()
@@ -37,6 +40,7 @@ export default {
   methods: {
     selectNote() {
       if(this.isSelected) { return }
+      console.log('dispatch select note', this.note.id, this.$store.getters['note/getNoteById'](this.note.id))
       this.$store.dispatch('note/selectNote', this.note.id)
     },
     addNoteToSelection() {

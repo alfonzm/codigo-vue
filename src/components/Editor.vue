@@ -4,6 +4,11 @@
       @init="editorInit"
       ref="editor"
       v-model="text"
+      @keypress.native="onUpdateEditorText"
+      @keyup.native.tab="onUpdateEditorText"
+      @keyup.native.delete="onUpdateEditorText"
+      @paste.native="onUpdateEditorText"
+      @cut.native="onUpdateEditorText"
       :theme="theme"
       lang="markdown"
     )
@@ -21,11 +26,13 @@ export default {
   },
   data() {
     return {
+      editorText: '',
       theme: 'github',
     }
   },
   computed: {
     ...mapState({
+      currentNoteId: state => state.note.currentNoteId,
       notes: state => state.note.notes,
       isVisible: state => state.ui.isVisible,
     }),
@@ -33,13 +40,9 @@ export default {
       currentNote: 'note/currentNote',
       notesList: 'note/notesList',
     }),
-
-    // this bidirectionally maps the text in Ace Editor to text of current note in state
-    // see: https://vuex.vuejs.org/guide/forms.html
     text: {
       get () {
         const text = this.currentNote ? this.currentNote.text : ''
-        console.log('get', text)
         return text
       },
       set (text) {
@@ -53,7 +56,10 @@ export default {
   watch: {
     isVisible() {
       // TODO: update/refresh/resize ace editor on toggle ui panes
-    }
+    },
+    currentNoteId() {
+      this.editorText = this.currentNote.text
+    },
   },
   async mounted() {
     this.setupAceEditor()
@@ -65,6 +71,9 @@ export default {
     }
   },
   methods: {
+    onUpdateEditorText() {
+      this.$store.dispatch('note/updateCurrentNoteTimestamp')
+    },
     loadFirstNote() {
       const id = this.notesList[0].id
       if (id) {

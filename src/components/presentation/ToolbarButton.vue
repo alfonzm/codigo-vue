@@ -22,5 +22,5 @@ export default {
   @apply tw-px-3 tw-py-1 tw-border tw-border-gray-300 tw-text-xs tw-rounded tw-outline-none
 
   &:hover
-    @apply tw-border-gray-400
+    @apply tw-border-gray-400 tw-cursor-pointer
 </style>

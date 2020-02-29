@@ -27,8 +27,10 @@ export default {
   getters: {
     getField,
     currentNote(state) {
-      console.log('current note', {...state.notes[state.currentNoteId]})
       return state.notes[state.currentNoteId]
+    },
+    getNoteById: (state,) => (id) => {
+      return state.notes[id]
     },
     textHtml(state, getters) {
       const currentNote = getters.currentNote
@@ -92,7 +94,6 @@ export default {
     },
     SET_CURRENT_NOTE_ID(state, id) {
       state.currentNoteId = id
-      console.log('done commit set current note id')
     },
     ADD_NOTE(state, { id, newNote }) {
       const updatedNotes = Object.assign({}, state.notes)
@@ -101,14 +102,31 @@ export default {
       state.notes = updatedNotes
     },
     DELETE_NOTE(state, id) {
-      console.log('after delete', _.omitBy(state.notes, (_, key) => key === id))
       state.notes = _.omitBy(state.notes, (_, key) => key === id)
     },
-    UPDATE_CURRENT_NOTE(state, updatedNote) {
+    UPDATE_CURRENT_NOTE(state, payload) {
       const { notes, currentNoteId } = state
+
+      // create the updated note
+      const updatedNote = {
+        ...notes[currentNoteId], // get current note
+        ...payload, // overwrite new fields
+      }
+
+      // create notes list with updated note
       const newNotes = Object.assign({}, notes)
       newNotes[currentNoteId] = updatedNote
       state.notes = newNotes
+
+      // persist updated note if no updates after 500ms
+      clearTimeout(state.saveTimeout)
+      const saveTimeout = setTimeout(() => {
+        if(state.notes[currentNoteId]) {
+          // make sure note was not deleted during 500ms
+          store.set(`notes.${currentNoteId}`, updatedNote)
+        }
+      }, 500)
+      state.saveTimeout = saveTimeout
     },
     CLEAR_SAVE_TIMEOUT(state) {
       clearTimeout(state.saveTimeout)
@@ -133,7 +151,6 @@ export default {
         text: '',
         timestamp: Number(moment().format('x'))
       }
-      console.log('creating', id)
       store.set(`notes.${id}`, newNote)
       commit('ADD_NOTE', { id, newNote })
 
@@ -143,33 +160,18 @@ export default {
 
       return { id, newNote }
     },
-    updateText({ commit, state }, text) {
-      const id = state.currentNoteId
-
-      const updatedNote = {
-        text,
+    updateCurrentNoteTimestamp({ commit }) {
+      commit('UPDATE_CURRENT_NOTE', {
         timestamp: Number(moment().format('x'))
-      }
-
-      commit('UPDATE_CURRENT_NOTE', updatedNote)
-      commit('CLEAR_SAVE_TIMEOUT')
-
-      // persist updated note after 500ms
-      const saveTimeout = setTimeout(() => {
-        // check if note was not deleted while waiting
-        if(state.notes[id]) {
-          console.log('saving ' + id)
-          store.set(`notes.${id}`, updatedNote)
-        }
-      }, 500)
-
-      commit('SET_SAVE_TIMEOUT', saveTimeout)
+      })
+    },
+    updateText({ commit }, text) {
+      commit('UPDATE_CURRENT_NOTE', { text })
     },
     selectNote({ commit }, id) {
       commit('SET_CURRENT_NOTE_ID', id)
     },
     deleteNote({ commit, dispatch, getters }, id) {
-      console.log('delete', id)
       store.delete(`notes.${id}`)
       commit('DELETE_NOTE', id)
 

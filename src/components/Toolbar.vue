@@ -1,12 +1,12 @@
 <template lang="pug">
   .toolbar
-    //- .toolbar__start
-    //-   toolbar-button.toolbar__btn(@click="createNewNote") New Note +
-    //-   toolbar-button.toolbar__btn(@click="deleteAllNotes") Delete All x
-    //- .toolbar__end
-    //-   toolbar-button.toolbar__btn(@click="togglePane('editor')") Toggle Editor
-    //-   toolbar-button.toolbar__btn(@click="togglePane('sidebar')") Toggle Sidebar
-    //-   toolbar-button.toolbar__btn(@click="togglePane('preview')") Toggle Preview
+    .toolbar__start
+      toolbar-button.toolbar__btn(@click="createNewNote") New Note +
+      toolbar-button.toolbar__btn(@click="deleteAllNotes") Delete All x
+    .toolbar__end
+      toolbar-button.toolbar__btn(@click="togglePane('editor')") Toggle Editor
+      toolbar-button.toolbar__btn(@click="togglePane('sidebar')") Toggle Sidebar
+      toolbar-button.toolbar__btn(@click="togglePane('preview')") Toggle Preview
 </template>
 
 <script>
@@ -38,7 +38,7 @@ export default {
 
 <style lang="sass">
 .toolbar
-  @apply tw-flex tw-justify-between tw-p-2 tw-border-b
+  @apply tw-flex tw-justify-between
 
   &__btn
     @apply tw-mr-1

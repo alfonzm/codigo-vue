@@ -1,6 +1,6 @@
 <template lang="pug">
   .app
-    toolbar.app__toolbar(v-if="isVisible.toolbar")
+    //- toolbar.app__toolbar(v-if="isVisible.toolbar")
     .app__workspace
       sidebar.workspace__sidebar(v-if="isVisible.sidebar")
       editor.workspace__editor(v-if="isVisible.editor")
@@ -65,14 +65,15 @@ export default {
 
 <style lang="sass">
 .app
+  @apply tw-mt-4
   @apply tw-h-screen tw-flex tw-flex-col
 
   &__toolbar
-    @apply tw-flex-grow-0 tw-flex-shrink-0 
+    @apply tw-flex-grow-0 tw-flex-shrink-0 tw-p-2
     flex-basis: 40px
 
   &__workspace
-    @apply tw-flex tw-flex-grow tw-h-full tw-overflow-scroll
+    @apply tw-flex tw-flex-grow tw-h-full tw-overflow-scroll tw-border-t tw-mt-5
 
 .workspace
   &__editor, &__preview, &__sidebar
