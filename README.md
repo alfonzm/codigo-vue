@@ -1,24 +1,22 @@
-# codigo-vue
+# Codigo
 
-## Project setup
+A Markdown editor and a note-taking app tailored for software developers.
+
+Made with Vue and Electron.
+
+## Setup
+
 ```
 npm install
 ```
 
-### Compiles and hot-reloads for development
+### Development
 ```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
+npm run dev
 ```
 
-### Lints and fixes files
+### Build Electron package
 ```
-npm run lint
+npm run electron:generate-icons
+npm run electron:build
 ```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
