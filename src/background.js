@@ -1,5 +1,7 @@
 'use strict'
 
+import { autoUpdater } from 'electron-updater'
+
 import {
   app,
   protocol,
@@ -42,6 +44,7 @@ function createWindow () {
     createProtocol('app')
     // Load the index.html when not in development
     win.loadURL('app://./index.html')
+    autoUpdater.checkForUpdatesAndNotify()
   }
 
   win.on('closed', () => {
