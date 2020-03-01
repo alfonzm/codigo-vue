@@ -93,6 +93,7 @@ export default {
         fontFamily: 'Source Code Pro',
         fontSize: 14,
         printMargin: false,
+        scrollPastEnd: 0.5,
       })
       // editor.setTheme('ace/theme/monokai')
     },
@@ -107,7 +108,7 @@ export default {
 
 <style lang="sass">
 .editor-wrapper
-  @apply tw-py-5 tw-px-4 tw-pr-0
+  @apply tw-pt-5 tw-px-4 tw-pr-0
 
 .editor
   @apply tw-h-screen tw-w-full
