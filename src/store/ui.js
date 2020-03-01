@@ -1,22 +1,20 @@
-// Handles current selected note, saving/editing current note, etc
+// Handles UI preferences
 
-// import _ from 'lodash'
-// import moment from 'moment'
-// import Store from 'electron-store'
+import Store from 'electron-store'
 
-// const store = new Store()
+const store = new Store()
 
 export default {
   namespaced: true,
 
-  state: {
+  state: store.get('ui', {
     isVisible: {
       toolbar: true,
       editor: true,
       preview: true,
       sidebar: true,
     }
-  },
+  }),
   getters: {},
   mutations: {
     SET_SHOW_EDITOR(state, isShowEditor) {
@@ -27,6 +25,7 @@ export default {
         ...state.isVisible,
         [viewName]: isVisible
       }
+      store.set('ui.isVisible', state.isVisible)
     }
   },
   actions: {

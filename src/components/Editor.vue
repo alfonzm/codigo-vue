@@ -65,7 +65,7 @@ export default {
     this.setupAceEditor()
 
     if(_.keys(this.notes).length > 0) {
-      this.loadFirstNote()
+      // this.loadFirstNote()
     } else {
       await this.$store.dispatch('note/createNewNote', true)
     }

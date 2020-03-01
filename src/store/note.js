@@ -20,7 +20,7 @@ export default {
 
   state: {
     searchText: '',
-    currentNoteId: null,
+    currentNoteId: store.get('currentNoteId', null),
     notes: store.get('notes', {}),
     saveTimeout: null,
   },
@@ -94,6 +94,7 @@ export default {
     },
     SET_CURRENT_NOTE_ID(state, id) {
       state.currentNoteId = id
+      store.set('currentNoteId', id)
     },
     ADD_NOTE(state, { id, newNote }) {
       const updatedNotes = Object.assign({}, state.notes)
