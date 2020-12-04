@@ -20,7 +20,7 @@
     "electron-store": "^5.1.1",
     "electron-updater": "^4.2.2",
     "github-markdown-css": "^4.0.0",
-    "highlight.js": "^9.18.1",
+    "highlight.js": "^10.4.1",
     "marked": "^0.8.0",
     "moment": "^2.24.0",
     "sanitize-html": "^1.22.0",
